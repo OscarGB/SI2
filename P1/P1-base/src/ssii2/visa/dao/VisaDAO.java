@@ -476,7 +476,7 @@ public class VisaDAO extends DBTester {
      */
     public void errorLog(String error) {
         if (isDebug())
-            System.err.println("[directConnection=" + this.isDirectConnection() +"] " +
+            getServletContext().log("[directConnection=" + this.isDirectConnection() +"] " +
                                error);
     }
 
