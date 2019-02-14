@@ -22,8 +22,7 @@ public class DBTester {
     // TODO: Definir la cadena de conexion a la base de datos
     /*********************************************************/
     private static final String JDBC_CONNSTRING =
-            "jdbc:postgresql://10.2.5.1:5432/visa";
-    //      "jdbc:postgresql://10.2.5.1:5432/visa;create=true";
+            "jdbc:postgresql://10.2.5.1:5432/visa;create=true";
     /*********************************************************/
     private static final String JDBC_USER = "alumnodb";
     private static final String JDBC_PASSWORD = "****";
@@ -53,7 +52,7 @@ public class DBTester {
 
             // Para conexiones directas, instanciamos el driver
             Class.forName(JDBC_DRIVER).newInstance();
-            
+
             // Para conexiones con pool, preparamos un datasource
             // Buscar el datasource por JNDI
             ds = (DataSource) new InitialContext().lookup(JDBC_DSN);
