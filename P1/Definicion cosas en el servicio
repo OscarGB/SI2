@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://dao.visa.ssii2/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://dao.visa.ssii2/">
+
+<xs:element name="compruebaTarjeta" type="tns:compruebaTarjeta"/>
+
+<xs:element name="compruebaTarjetaResponse" type="tns:compruebaTarjetaResponse"/>
+
+<xs:element name="delPagos" type="tns:delPagos"/>
+
+<xs:element name="delPagosResponse" type="tns:delPagosResponse"/>
+
+<xs:element name="errorLog" type="tns:errorLog"/>
+
+<xs:element name="errorLogResponse" type="tns:errorLogResponse"/>
+
+<xs:element name="getPagos" type="tns:getPagos"/>
+
+<xs:element name="getPagosResponse" type="tns:getPagosResponse"/>
+
+<xs:element name="isDebug" type="tns:isDebug"/>
+
+<xs:element name="isDebugResponse" type="tns:isDebugResponse"/>
+
+<xs:element name="isDirectConnection" type="tns:isDirectConnection"/>
+
+<xs:element name="isDirectConnectionResponse" type="tns:isDirectConnectionResponse"/>
+
+<xs:element name="isPrepared" type="tns:isPrepared"/>
+
+<xs:element name="isPreparedResponse" type="tns:isPreparedResponse"/>
+
+<xs:element name="realizaPago" type="tns:realizaPago"/>
+
+<xs:element name="realizaPagoResponse" type="tns:realizaPagoResponse"/>
+
+<xs:element name="setDebug" type="tns:setDebug"/>
+
+<xs:element name="setDebugResponse" type="tns:setDebugResponse"/>
+
+<xs:element name="setDirectConnection" type="tns:setDirectConnection"/>
+
+<xs:element name="setDirectConnectionResponse" type="tns:setDirectConnectionResponse"/>
+
+<xs:element name="setPrepared" type="tns:setPrepared"/>
+
+<xs:element name="setPreparedResponse" type="tns:setPreparedResponse"/>
+
+<xs:complexType name="errorLog">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="errorLogResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="compruebaTarjeta">
+<xs:sequence>
+<xs:element name="arg0" type="tns:tarjetaBean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tarjetaBean">
+<xs:sequence>
+<xs:element name="codigoVerificacion" type="xs:string" minOccurs="0"/>
+<xs:element name="fechaCaducidad" type="xs:string" minOccurs="0"/>
+<xs:element name="fechaEmision" type="xs:string" minOccurs="0"/>
+<xs:element name="numero" type="xs:string" minOccurs="0"/>
+<xs:element name="titular" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="compruebaTarjetaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setDebug">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setDebugResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="realizaPago">
+<xs:sequence>
+<xs:element name="arg0" type="tns:pagoBean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pagoBean">
+<xs:sequence>
+<xs:element name="codRespuesta" type="xs:string" minOccurs="0"/>
+<xs:element name="idAutorizacion" type="xs:string" minOccurs="0"/>
+<xs:element name="idComercio" type="xs:string" minOccurs="0"/>
+<xs:element name="idTransaccion" type="xs:string" minOccurs="0"/>
+<xs:element name="importe" type="xs:double"/>
+<xs:element name="rutaRetorno" type="xs:string" minOccurs="0"/>
+<xs:element name="tarjeta" type="tns:tarjetaBean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="realizaPagoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pagoBean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setPrepared">
+<xs:sequence>
+<xs:element name="arg0" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setPreparedResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getPagos">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPagosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pagoBean" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="isDirectConnection">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="isDirectConnectionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="isDebug">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="isDebugResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="delPagos">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="delPagosResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="isPrepared">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="isPreparedResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setDirectConnection">
+<xs:sequence>
+<xs:element name="arg0" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setDirectConnectionResponse">
+<xs:sequence/>
+</xs:complexType>
+</xs:schema>
