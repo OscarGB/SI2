@@ -45,6 +45,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ssii2.visa.*;
 import ssii2.visa.dao.VisaDAO;
+import ssii2.visa.VisaDAOWSService; // Stub generado automáticamente
+import ssii2.visa.VisaDAOWS; // Stub generado automáticamente
+import javax.xml.ws.WebServiceRef;
 
 /**
  *
@@ -135,7 +138,7 @@ private void printAddresses(HttpServletRequest request, HttpServletResponse resp
     */
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    throws ServletException, IOException, WebServiceException {
                  
         TarjetaBean tarjeta = creaTarjeta(request);            
         ValidadorTarjeta val = new ValidadorTarjeta();                        
@@ -148,7 +151,9 @@ private void printAddresses(HttpServletRequest request, HttpServletResponse resp
             return;
         }
 
-		VisaDAO dao = new VisaDAO();
+        VisaDAOWSService service = new VisaDAOWSService();
+		VisaDAOWS dao = service.getVisaDAOWSPort();
+
 		HttpSession sesion = request.getSession(false);
 		if (sesion != null) {
 			pago = (PagoBean) sesion.getAttribute(ComienzaPago.ATTR_PAGO);
@@ -171,7 +176,8 @@ private void printAddresses(HttpServletRequest request, HttpServletResponse resp
             return;
         }
 
-	if (! dao.realizaPago(pago)) {      
+    pago = dao.realizaPago(pago);
+	if (pago == null) {      
             enviaError(new Exception("Pago incorrecto"), request, response);
             return;
         }
