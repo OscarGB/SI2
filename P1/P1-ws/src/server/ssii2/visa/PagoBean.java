@@ -16,13 +16,13 @@ public class PagoBean {
 	private String idTransaccion; 
 	private String idComercio;  
 	private double importe;
-        private String ruta_retorno;
-        
-        private TarjetaBean tarjeta;
-        
-        /* Calculados por el gestor de medios de pago */
-        private String codRespuesta;    
-        private String idAutorizacion;  
+    private String ruta_retorno;
+    
+    private TarjetaBean tarjeta;
+    
+    /* Calculados por el gestor de medios de pago */
+    private String codRespuesta;    
+    private String idAutorizacion;  
 
     /**
      * @return el ID de transacci&oacute;n
