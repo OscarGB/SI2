@@ -481,9 +481,9 @@ public class VisaDAOWS extends DBTester {
     /**
      * @param debug the debug to set
      */
-    public void setDebug(String debug) {
-        this.debug = (debug.equals("true"));
-    }
+    //public void setDebug(String debug) {
+    //    this.debug = (debug.equals("true"));
+    //}
 
 
     /**
