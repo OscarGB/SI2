@@ -44,10 +44,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import ssii2.visa.*;
-import ssii2.visa.dao.VisaDAO;
+//import ssii2.visa.dao.VisaDAO;
 import ssii2.visa.VisaDAOWSService; // Stub generado automáticamente
 import ssii2.visa.VisaDAOWS; // Stub generado automáticamente
 import javax.xml.ws.WebServiceRef;
+import javax.xml.ws.BindingProvider;
 
 /**
  *
@@ -138,7 +139,7 @@ private void printAddresses(HttpServletRequest request, HttpServletResponse resp
     */
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException, WebServiceException {
+    throws ServletException, IOException {
                  
         TarjetaBean tarjeta = creaTarjeta(request);            
         ValidadorTarjeta val = new ValidadorTarjeta();                        
@@ -151,9 +152,16 @@ private void printAddresses(HttpServletRequest request, HttpServletResponse resp
             return;
         }
 
-        VisaDAOWSService service = new VisaDAOWSService();
-		VisaDAOWS dao = service.getVisaDAOWSPort();
-
+        try{ //Aqui podemos tener error de conexion (entre otros)
+            VisaDAOWSService service = new VisaDAOWSService();
+    		VisaDAOWS dao = service.getVisaDAOWSPort();
+            BindingProvider bp = (BindingProvider) dao;
+            bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, 
+                                        getServletContext().getInitParameter("direccion"));
+        }catch (Exception e){
+            enviaError(e, request, response); //Enviamos el error con el exception trace completo
+            return;
+        }
 		HttpSession sesion = request.getSession(false);
 		if (sesion != null) {
 			pago = (PagoBean) sesion.getAttribute(ComienzaPago.ATTR_PAGO);
@@ -176,8 +184,8 @@ private void printAddresses(HttpServletRequest request, HttpServletResponse resp
             return;
         }
 
-    pago = dao.realizaPago(pago);
-	if (pago == null) {      
+        pago = dao.realizaPago(pago);
+    	if (pago == null) {      
             enviaError(new Exception("Pago incorrecto"), request, response);
             return;
         }
