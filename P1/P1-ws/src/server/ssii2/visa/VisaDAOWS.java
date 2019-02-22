@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import java.util.ArrayList;
 
 
 
@@ -324,7 +325,8 @@ public class VisaDAOWS extends DBTester {
      * @param idComercio
      * @return
      */
-    public PagoBean[] getPagos(String idComercio) {
+    @WebMethod
+    public ArrayList<PagoBean> getPagos(@WebParam String idComercio) {
 
         PreparedStatement pstmt = null;
         Connection pcon = null;
@@ -387,8 +389,10 @@ public class VisaDAOWS extends DBTester {
             } catch (SQLException e) {
             }
         }
-
-        return ret;
+        if(ret != null)
+            return pagos;
+        else
+            return null;
     }
 
     // Borrar los pagos asociados a un comercio
@@ -397,7 +401,8 @@ public class VisaDAOWS extends DBTester {
      * @param idComercio
      * @return numero de registros afectados
      */
-    public int delPagos(String idComercio) {
+    @WebMethod
+    public int delPagos(@WebParam String idComercio) {
 
         PreparedStatement pstmt = null;
         Connection pcon = null;
@@ -476,9 +481,9 @@ public class VisaDAOWS extends DBTester {
     /**
      * @param debug the debug to set
      */
-    public void setDebug(String debug) {
-        this.debug = (debug.equals("true"));
-    }
+    //public void setDebug(String debug) {
+    //    this.debug = (debug.equals("true"));
+    //}
 
 
     /**

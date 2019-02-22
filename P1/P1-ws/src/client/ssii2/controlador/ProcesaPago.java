@@ -151,10 +151,10 @@ private void printAddresses(HttpServletRequest request, HttpServletResponse resp
             reenvia("/formdatosvisa.jsp", request, response);
             return;
         }
-
+        VisaDAOWS dao = null;
         try{ //Aqui podemos tener error de conexion (entre otros)
             VisaDAOWSService service = new VisaDAOWSService();
-    		VisaDAOWS dao = service.getVisaDAOWSPort();
+    		dao = service.getVisaDAOWSPort();
             BindingProvider bp = (BindingProvider) dao;
             bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, 
                                         getServletContext().getInitParameter("direccion"));
