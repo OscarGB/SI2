@@ -24,12 +24,11 @@ import java.util.ArrayList;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 
-
-
 /**
  * @author jaime
  */
-public class VisaDAOBean extends DBTester {
+@Stateless
+public class VisaDAOBean extends DBTester implements VisaDAOLocal {
 
     private boolean debug = false;
 
@@ -79,12 +78,12 @@ public class VisaDAOBean extends DBTester {
     /**************************************************/
 
     
-    /**
-     * Constructor de la clase     
-     */
-    public VisaDAOBean() {
-        return;
-    }
+    // /**
+    //  * Constructor de la clase     
+    //  */
+    // public VisaDAOBean() {
+    //     return;
+    // }
 
 
     /**
@@ -322,7 +321,7 @@ public class VisaDAOBean extends DBTester {
      * @param idComercio
      * @return
      */
-    public ArrayList<PagoBean> getPagos(String idComercio) {
+    public PagoBean[] getPagos(String idComercio) {
 
         PreparedStatement pstmt = null;
         Connection pcon = null;
@@ -386,7 +385,7 @@ public class VisaDAOBean extends DBTester {
             }
         }
         if(ret != null)
-            return pagos;
+            return ret;
         else
             return null;
     }
