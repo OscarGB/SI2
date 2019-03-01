@@ -1,0 +1,3 @@
+Ejercicio 2:
+	Se realizan las modificaciones necesarias (imports y meter la anotación del EJB) en procesapago, getpagos y comienza pagos (capturas imports y anotacion)
+	Se modifica GetPagos para ajustarse a la definición de VisaDAOLocal (captura getpagos)
