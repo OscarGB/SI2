@@ -2,7 +2,7 @@
 <application version="5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd">
   <display-name>P1-ejb-transaccional</display-name>
   <module>
-    <ejb>P1-ejb.jar</ejb>
+    <ejb>P1-ejb-transaccional.jar</ejb>
   </module>
   <module>
     <web>

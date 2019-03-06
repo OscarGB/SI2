@@ -35,8 +35,9 @@ public class VisaCancelacionJMSBean extends DBTester implements MessageListener 
             "where idautorizacion=?";
 
   private static final String RECTIFICA_QRY = 
-            "update tarjetas " + 
+            "update tarjeta " + 
             "set saldo=saldo+pago.importe " +
+            "from pago " +
             "where pago.idAutorizacion=? and tarjeta.numerotarjeta = pago.numerotarjeta"; 
 
 
@@ -83,8 +84,6 @@ public class VisaCancelacionJMSBean extends DBTester implements MessageListener 
           mdc.setRollbackOnly();
       } catch (Throwable te) {
           te.printStackTrace();
-      } catch (Exception ee) {
-          logger.warning(ee.getMessage());
       }
   }
 

@@ -17,7 +17,7 @@ public class VisaQueueMessageProducer {
     // TODO: Anotar los siguientes objetos para
     // conectar con la connection factory y con la cola
     // definidas en el enunciado
-    @Resource(mappedName = "jms/VisaconnectionFactory")
+    @Resource(mappedName = "jms/VisaConnectionFactory")
     private static ConnectionFactory connectionFactory;
     @Resource(mappedName = "jms/VisaPagosQueue")
     private static Queue queue;
@@ -69,7 +69,7 @@ public class VisaQueueMessageProducer {
         try {
           // TODO: Inicializar connectionFactory
           // y queue mediante JNDI
-          
+
           // InitialContext jndi = new InitialContext();
           // connectionFactory = (ConnectionFactory)jndi.lookup("jms/VisaconnectionFactory");
           // queue = (Queue)jndi.lookup("jms/VisaPagosQueue");
@@ -80,6 +80,12 @@ public class VisaQueueMessageProducer {
             browseMessages(session); 
           } else {
             // TODO: Enviar argv[0] como mensaje de texto
+            messageProducer = session.createProducer(queue);
+            message = session.createTextMessage();
+            message.setText(args[0]);
+            messageProducer.send(message);
+            messageProducer.close();
+            session.close();
           }
         } catch (Exception e) {
             System.out.println("Excepcion : " + e.toString());

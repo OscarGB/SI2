@@ -55,3 +55,14 @@ Ejercicio 11
 
 Ejercicio 12
 	Modificamos VisaQueueMessageProducer para acceder a los recursos necesarios (capturas 12)
+
+Ejercicio 13
+	Introducimos los valores de las ips en las propiedades de jms y build, estas ips son necesarias porque indican donde se encuentran los recursos jms.
+	Tras ejecutar ant todo, vemos que los recursos se han creado en el servidor (capturas 13)
+	Vemos que en jms.xml, el comando para crear lso recursos es asadmin ------ create-jms-resource
+
+Ejercicio 14:
+	Implementamos el envio del mensaj (captura 14 - enviar) y lo comprobamos, podemos ver que "12" se ha quedado en la cola de mensajes (Captura 14 - mensaje en cola)
+	Hacemos un pago con la aplicación transaccional (captura 14 - comprobante pago)
+	Vemos que en la base de datos el saldo ha disminuido y aparece el pago (Capturas 14 - bbdd saldo 900 y pago 000)
+	Cancelamos el pago y vemos que el saldo vuelve al original (Capturas 14 - bbdd saldo 1000) y que el codigo de pago pasa a ser 999 (Captura 14 - bbdd pago 999)
