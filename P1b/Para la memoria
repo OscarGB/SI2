@@ -1,0 +1,68 @@
+Ejercicio 2:
+	Se realizan las modificaciones necesarias (imports y meter la anotación del EJB) en procesapago, getpagos y comienza pagos (capturas imports y anotacion)
+	Se modifica GetPagos para ajustarse a la definición de VisaDAOLocal (captura getpagos)
+
+Cuestion 2:
+	Application.xml es el descriptor de despliegue de una aplicacion Java EE. Define él despliegue gracias a etiquetas como:
+	· Display-name: nombre de la aplicación
+	· module: define cada módulo de la aplicación, con las etiquetas internas se define el tipo:
+		· web: define el módulo con interfaz web, define su uri y su contexto.
+	En cuanto a los ear y los jar:
+		· Ear: tiene los dos jar dentro (es la aplicación completa)
+		· Jar: contiene las clases del servidor
+		· War: contiene las clases del cliente, así como la interfaz web
+	Además podemos ver que cliente y servidor están definidos como dos módulos diferentes en el application.xml
+
+Ejercicio 3:
+	Cambiamos las ips en los dos archivos (capturas ej 3)
+
+Ejercicio 4:
+	Accedemos a testbd y realizamos un pago con los siguientes datos (captura 4 - datos pago). Vemos que se realiza correctamente (captura 4 - pago desde testbd). Al listarlo aparece el pago que acabamos de realizar (captura 4 - getPagos). También podemos eliminarlo (captura 4 - delPagos)
+	También podemos realizar un pago desde pago.html, obteniendo también un resultado satisfactorio.
+
+Ejercicio 5:
+	Seguimos todos los pasos:
+	· Creamos un nuevo fichero, VisaDAORemote anotándolo con @Remote (Captura 5 - VisaDAORemote)
+	· Especificamos que VisaDAOBean implementa esta nueva interfaz (Captura 5 - Implements)
+	· Serializamos TarjetaBean y PagoBean (Captura 5 - Beans)
+	
+Ejercicio 6:
+	Seguimos todos los pasos:
+	· Creamos el cliente remoto, tomando como referencia P1-base, copiamos VisaDAORemote y añadimos la nueva variable dao (6 - defdao)
+	· También debemos modificar el uso de realizaPago en ProcesaPago, ya que ahora devuelve un PagoBean
+	Vemos que el proceso de pago funciona correctamente (Capturas ej 6)
+
+Ejercicio 7
+	Realizamos las modificaciones:
+	· Añadimos el campo saldo (captura 7 - anadir saldo)
+	· Añadimos el segmento de código que realiza las consultas a la base de datos para consultar el dato y actualizarlo (capturas 7 - queries y saldo)
+	· en ProcesaPago, rodeamos la función realizaPago con un try catch para capturar la excepción que lanzamos en el DAO.( captura 7 - try catch)
+
+Ejercicio 8
+	Realizamos un pago correcto, comprobando que el saldo disminuye (capturas 8 - datos, pago correcto y disminucion saldo)
+	Realizamos un pago repetido, nos da error (captura 8 - pago repetido) y comprobamos que el saldo no se ha modificado en la base de datos (captura 8 - disminucion saldo)
+	
+Ejercicio 9
+	Creamos el connection factory jms (captura 9)
+
+Ejercicio 10
+	Creamos la cola de recepcion jms (captura 10)
+
+Ejercicio 11
+	Modificamos el fichero introduciendo el nombre del recurso jms que acabamos de crear como connection factory (captura 11 - sun ejb jar)
+	Creamos las queries conociendo la estructura de la base de datos (captura 11 - queries)
+	Realizamos el código que realiza todas las consultas (captura 11 - onmessage)
+
+Ejercicio 12
+	Modificamos VisaQueueMessageProducer para acceder a los recursos necesarios (capturas 12)
+
+Ejercicio 13
+	Introducimos los valores de las ips en las propiedades de jms y build, estas ips son necesarias porque indican donde se encuentran los recursos jms.
+	Tras ejecutar ant todo, vemos que los recursos se han creado en el servidor (capturas 13)
+	Vemos que en jms.xml, el comando para crear lso recursos es asadmin ------ create-jms-resource
+
+Ejercicio 14:
+	Implementamos el envio del mensaj (captura 14 - enviar) y lo comprobamos, podemos ver que "12" se ha quedado en la cola de mensajes (Captura 14 - mensaje en cola)
+	Hacemos un pago con la aplicación transaccional (captura 14 - comprobante pago)
+	Vemos que en la base de datos el saldo ha disminuido y aparece el pago (Capturas 14 - bbdd saldo 900 y pago 000)
+	Cancelamos el pago y vemos que el saldo vuelve al original (Capturas 14 - bbdd saldo 1000) y que el codigo de pago pasa a ser 999 (Captura 14 - bbdd pago 999)
