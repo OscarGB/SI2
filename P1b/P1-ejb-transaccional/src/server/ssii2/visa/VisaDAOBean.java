@@ -28,7 +28,7 @@ import javax.ejb.Stateless;
  * @author jaime
  */
 @Stateless
-public class VisaDAOBean extends DBTester implements VisaDAORemote, VisaDAOLocal {
+public class VisaDAOBean extends DBTester implements VisaDAOLocal {
 
     private boolean debug = false;
 
@@ -75,6 +75,15 @@ public class VisaDAOBean extends DBTester implements VisaDAORemote, VisaDAOLocal
                     " from pago " +
                     " where idTransaccion = ?" +
                     " and idComercio = ?";
+
+     private static final String GET_SALDO_QRY = 
+                    "select saldo from tarjeta " +
+                    "where numeroTarjeta=?";
+
+    private static final String SET_SALDO_QRY = 
+                    "update tarjeta " +
+                    "set saldo=?" +
+                    "where numeroTarjeta=?";
     /**************************************************/
 
     
@@ -230,6 +239,38 @@ public class VisaDAOBean extends DBTester implements VisaDAORemote, VisaDAOLocal
             // Obtener conexion
             con = getConnection();
 
+            // Comprobar que tenemos saldo suficiente
+            String getSaldo  = GET_SALDO_QRY;
+            errorLog(getSaldo);
+            pstmt = con.prepareStatement(getSaldo);
+            pstmt.setString(1, pago.getTarjeta().getNumero());
+            ret = null;
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                double saldo_actual = rs.getDouble("saldo");
+                double saldo_final = saldo_actual - pago.getImporte();
+                if (saldo_final < 0){
+                    pago.setIdAutorizacion(null);
+                    return null;
+                }
+                else{
+                    String setSaldo  = SET_SALDO_QRY;
+                    errorLog(setSaldo);
+                    pstmt = con.prepareStatement(setSaldo);
+                    pstmt.setDouble(1, saldo_final);
+                    pstmt.setString(2, pago.getTarjeta().getNumero());
+                    ret = null;
+                    if (!pstmt.execute() && pstmt.getUpdateCount() == 1) {
+                        ret = pago;
+                    }else{
+                        throw new EJBException();
+                    }
+                }
+            }
+            else{
+                throw new EJBException();
+            }
+
             // Insertar en la base de datos el pago
 
             /* TODO Usar prepared statement si
@@ -312,6 +353,7 @@ public class VisaDAOBean extends DBTester implements VisaDAORemote, VisaDAOLocal
             }
         }
 
+        if(ret == null) throw new EJBException("Error en realizaPago");
         return ret;
     }
 

@@ -29,9 +29,15 @@ public class VisaCancelacionJMSBean extends DBTester implements MessageListener 
   @Resource
   private MessageDrivenContext mdc;
 
-  private static final String UPDATE_CANCELA_QRY = null;
-   // TODO : Definir UPDATE sobre la tabla pagos para poner
-   // codRespuesta a 999 dado un código de autorización
+  private static final String UPDATE_CANCELA_QRY = 
+            "update pago " + 
+            "set codrespuesta=999 " +
+            "where idautorizacion=?";
+
+  private static final String RECTIFICA_QRY = 
+            "update tarjetas " + 
+            "set saldo=saldo+pago.importe " +
+            "where pago.idAutorizacion=? and tarjeta.numerotarjeta = pago.numerotarjeta"; 
 
 
   public VisaCancelacionJMSBean() {
@@ -44,11 +50,29 @@ public class VisaCancelacionJMSBean extends DBTester implements MessageListener 
   // la actualización
   public void onMessage(Message inMessage) {
       TextMessage msg = null;
+      Connection con = null;
 
       try {
           if (inMessage instanceof TextMessage) {
               msg = (TextMessage) inMessage;
               logger.info("MESSAGE BEAN: Message received: " + msg.getText());
+              int idautorizacion = Integer.parseInt(msg.getText());
+              con = getConnection();
+
+              PreparedStatement pstmt = con.prepareStatement(UPDATE_CANCELA_QRY);
+              pstmt.setInt(1, idautorizacion);
+              if(pstmt.execute() || pstmt.getUpdateCount() != 1){
+                logger.warning("Error en update cancelacion de pago");
+              }
+              pstmt.close();
+
+              pstmt = con.prepareStatement(RECTIFICA_QRY);
+              pstmt.setInt(1, idautorizacion);
+              if(pstmt.execute() || pstmt.getUpdateCount() != 1){
+                logger.warning("Error en rectificacion saldo en cancelacion de pago");
+              }
+              pstmt.close();
+
           } else {
               logger.warning(
                       "Message of wrong type: "
@@ -59,6 +83,8 @@ public class VisaCancelacionJMSBean extends DBTester implements MessageListener 
           mdc.setRollbackOnly();
       } catch (Throwable te) {
           te.printStackTrace();
+      } catch (Exception ee) {
+          logger.warning(ee.getMessage());
       }
   }
 

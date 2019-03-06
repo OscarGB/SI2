@@ -31,3 +31,27 @@ Ejercicio 6:
 	· Creamos el cliente remoto, tomando como referencia P1-base, copiamos VisaDAORemote y añadimos la nueva variable dao (6 - defdao)
 	· También debemos modificar el uso de realizaPago en ProcesaPago, ya que ahora devuelve un PagoBean
 	Vemos que el proceso de pago funciona correctamente (Capturas ej 6)
+
+Ejercicio 7
+	Realizamos las modificaciones:
+	· Añadimos el campo saldo (captura 7 - anadir saldo)
+	· Añadimos el segmento de código que realiza las consultas a la base de datos para consultar el dato y actualizarlo (capturas 7 - queries y saldo)
+	· en ProcesaPago, rodeamos la función realizaPago con un try catch para capturar la excepción que lanzamos en el DAO.( captura 7 - try catch)
+
+Ejercicio 8
+	Realizamos un pago correcto, comprobando que el saldo disminuye (capturas 8 - datos, pago correcto y disminucion saldo)
+	Realizamos un pago repetido, nos da error (captura 8 - pago repetido) y comprobamos que el saldo no se ha modificado en la base de datos (captura 8 - disminucion saldo)
+	
+Ejercicio 9
+	Creamos el connection factory jms (captura 9)
+
+Ejercicio 10
+	Creamos la cola de recepcion jms (captura 10)
+
+Ejercicio 11
+	Modificamos el fichero introduciendo el nombre del recurso jms que acabamos de crear como connection factory (captura 11 - sun ejb jar)
+	Creamos las queries conociendo la estructura de la base de datos (captura 11 - queries)
+	Realizamos el código que realiza todas las consultas (captura 11 - onmessage)
+
+Ejercicio 12
+	Modificamos VisaQueueMessageProducer para acceder a los recursos necesarios (capturas 12)
