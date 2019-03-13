@@ -17,7 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ssii2.visa.PagoBean;
-import ssii2.visa.dao.VisaDAO;
+// import ssii2.visa.dao.VisaDAO;
 import javax.ejb.EJB;
 import ssii2.visa.VisaDAORemote;
 
