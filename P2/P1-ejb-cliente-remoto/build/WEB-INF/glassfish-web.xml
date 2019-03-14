@@ -3,6 +3,6 @@
 <glassfish-web-app>
 	<ejb-ref>
 		<ejb-ref-name>VisaDAOBean</ejb-ref-name>
-		<jndi-name>corbaname:iiop:10.2.5.2:3700#java:global/P1-ejb/P1-ejb/VisaDAOBean!ssii2.visa.VisaDAORemote</jndi-name>
+		<jndi-name>corbaname:iiop:10.2.5.1:3700#java:global/P1-ejb/P1-ejb/VisaDAOBean!ssii2.visa.VisaDAORemote</jndi-name>
 	</ejb-ref>
 </glassfish-web-app>
