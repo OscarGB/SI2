@@ -39,7 +39,7 @@
           <elementProp name="samples" elementType="Argument">
             <stringProp name="Argument.name">samples</stringProp>
             <stringProp name="Argument.value">1000</stringProp>
-            <stringProp name="Argument.desc">Numero de muestras</stringProp>
+            <stringProp name="Argument.desc">Numero de muestras1</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
