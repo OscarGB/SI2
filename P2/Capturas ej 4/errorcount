@@ -1,0 +1,3 @@
+/opt/glassfish4/bin/asadmin --host 10.2.5.1 --user admin --passwordfile ./SI2/P2/passwordfile monitor --type httplistener server
+
+Sale una tabla con 4 valores, ec es el error count
