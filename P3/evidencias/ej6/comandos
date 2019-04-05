@@ -1,0 +1,6 @@
+los comandos ejecutados son
+
+ssh -X si2@10.2.5.2
+ps -aux | grep java
+	-----> Obtenemos que el pid de la JVM es 4048
+kill -9 4048

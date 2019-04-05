@@ -1,0 +1,2 @@
+No de podría usar ese valor ya que un solo Nodo (mismo hostName) podría albergar distintas instancias. Debido a que cada instancia se ejecuta en una JVM distinta, los datos pueden estar desincronizado.
+Por ello debemos hacer referencia a una instancia porque, debido a que es una sola JVM, no hay posibilidad de desincronización.

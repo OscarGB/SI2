@@ -1,0 +1,3 @@
+Utiliza un algoritmo de reparto equitativo, parece que el 50% de las transacciones van a una instancia y el otro 50% van a la otra instancia.
+En nuestro caso no ha habido pagos incorrectos.
+De esta manera, la carga entre ambos servidores debería ser aproximadamente la misma, evitando la saturación en todas las instancias.
