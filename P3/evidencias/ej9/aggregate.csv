@@ -1,0 +1,3 @@
+Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Sent KB/sec
+P1-base,1000,14,14,17,18,26,11,49,0.000%,66.48936,91.33,0.00
+TOTAL,1000,14,14,17,18,26,11,49,0.000%,66.48936,91.33,0.00
