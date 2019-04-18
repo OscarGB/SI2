@@ -1,5 +1,0 @@
-Utiliza un algoritmo de reparto equitativo, parece que el 50% de las transacciones van a una instancia y el otro 50% van a la otra instancia.
-En nuestro caso no ha habido pagos incorrectos.
-De esta manera, la carga entre ambos servidores debería ser aproximadamente la misma, evitando la saturación en todas las instancias.
-
-Para comparar el rendimiento, vemos que mantiene el throghput. Dado que las máquinas ahora cuentan con la mitad de RAM, que era nuestra limitación, vemos que no ha habido prácticamente pérdida de rendimiento debido al balanceador. En caso de que las máquinas contasen con la misma RAM que en la práctica anterior, el rendimiento debería prácticamente doblarse.
